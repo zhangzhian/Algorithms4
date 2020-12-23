@@ -4,6 +4,7 @@ import com.zza.at.leetcode.common.TreeNode;
 
 import java.util.LinkedList;
 
+//二叉树的深度
 public class Solution003 {
     public int maxDepth(TreeNode root) {
         if(root == null) return 0;
