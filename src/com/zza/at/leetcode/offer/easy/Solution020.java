@@ -1,5 +1,6 @@
 package com.zza.at.leetcode.offer.easy;
 
+//调整数组顺序使奇数位于偶数前面
 public class Solution020 {
     public int[] exchange(int[] nums) {
        int i = 0; //偶数指针
