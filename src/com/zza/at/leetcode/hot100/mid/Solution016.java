@@ -1,5 +1,6 @@
 package com.zza.at.leetcode.hot100.mid;
 
+//寻找重复数
 public class Solution016 {
     public int findDuplicate(int[] nums) {
         int temp;
