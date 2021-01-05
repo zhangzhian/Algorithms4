@@ -1,29 +1,44 @@
 package com.zza.at.leetcode.offer.mid;
 
-//构建乘积数组
+import java.util.Stack;
+
+//栈的压入、弹出序列
 public class Solution011 {
-    public int[] constructArr(int[] a) {
-        if(a == null || a.length == 0) return new int[0];
-        int[] ret = new int[a.length];
-        ret[0] = 1;
-        int tmp = 1;
-        for (int i = 1; i < a.length; i++) {
-            ret[i] = ret[i-1] * a[i-1];
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        int index = 0;
+        int[] tmpe = new int[pushed.length];
+        for (int i = 0, j = 0; i < pushed.length; i++, index++) {
+            tmpe[index] = pushed[i];//模拟入栈
+            while (index >= 0 && j < popped.length && tmpe[index] == popped[j]) {// 循环判断与模拟出栈
+                j++;
+                index--;
+            }
         }
+        return index == 0;
+    }
 
-        for (int i = a.length-2 ; i >= 0; i--){
-            tmp *= a[i + 1];
-            ret[i] *= tmp;
+    public boolean validateStackSequences1(int[] pushed, int[] popped) {
+        Stack<Integer> stack = new Stack<>();
+        int i = 0;
+        for(int num : pushed) {
+            stack.push(num); // num 入栈
+            while(!stack.isEmpty() && stack.peek() == popped[i]) { // 循环判断与出栈
+                stack.pop();
+                i++;
+            }
         }
-
-        return ret;
+        return stack.isEmpty();
     }
 
     public static void main(String[] args) {
-        //[120,60,40,30,24]
-        int[] ret = new Solution011().constructArr(new int[]{1,2,3,4,5});
-        for (int i = 0; i < ret.length; i++) {
-            System.out.println(ret[i]);
-        }
+        //pushed = [1,2,3,4,5], popped = [4,5,3,2,1] 输出：true
+        //pushed = [1,2,3,4,5], popped = [4,3,5,1,2] 输出：false
+        int[] test1 = {1,2,3,4,5};
+        int[] test2 = {4,5,3,2,1};
+        int[] test3 = {4,3,5,1,2};
+        System.out.println(new Solution011().validateStackSequences(test1,test2));
+        System.out.println(new Solution011().validateStackSequences(test1,test3));
+        System.out.println(new Solution011().validateStackSequences1(test1,test2));
+        System.out.println(new Solution011().validateStackSequences1(test1,test3));
     }
 }

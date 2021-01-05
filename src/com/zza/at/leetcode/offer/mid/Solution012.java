@@ -1,29 +1,29 @@
 package com.zza.at.leetcode.offer.mid;
 
-import com.zza.at.leetcode.common.TreeNode;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-
-//从上到下打印二叉树 III
+//构建乘积数组
 public class Solution012 {
-    public List<List<Integer>> levelOrder(TreeNode root) {
-        Queue<TreeNode> queue = new LinkedList<>();
-        List<List<Integer>> res = new ArrayList<>();
-        if(root != null) queue.add(root);
-        while(!queue.isEmpty()) {
-            LinkedList<Integer> tmp = new LinkedList<>();
-            for(int i = queue.size(); i > 0; i--) {
-                TreeNode node = queue.poll();
-                if(res.size() % 2 == 0) tmp.addLast(node.val); // 偶数层 -> 队列头部
-                else tmp.addFirst(node.val); // 奇数层 -> 队列尾部
-                if(node.left != null) queue.add(node.left);
-                if(node.right != null) queue.add(node.right);
-            }
-            res.add(tmp);
+    public int[] constructArr(int[] a) {
+        if(a == null || a.length == 0) return new int[0];
+        int[] ret = new int[a.length];
+        ret[0] = 1;
+        int tmp = 1;
+        for (int i = 1; i < a.length; i++) {
+            ret[i] = ret[i-1] * a[i-1];
         }
-        return res;
+
+        for (int i = a.length-2 ; i >= 0; i--){
+            tmp *= a[i + 1];
+            ret[i] *= tmp;
+        }
+
+        return ret;
+    }
+
+    public static void main(String[] args) {
+        //[120,60,40,30,24]
+        int[] ret = new Solution012().constructArr(new int[]{1,2,3,4,5});
+        for (int i = 0; i < ret.length; i++) {
+            System.out.println(ret[i]);
+        }
     }
 }
