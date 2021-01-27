@@ -1,6 +1,6 @@
 package com.zza.at.leetcode.offer.mid;
 
-
+//二叉搜索树的后序遍历序列
 public class Solution020 {
     public boolean verifyPostorder(int[] postorder) {
         return recur(postorder, 0, postorder.length - 1);
