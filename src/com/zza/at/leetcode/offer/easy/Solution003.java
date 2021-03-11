@@ -5,11 +5,40 @@ import com.zza.at.leetcode.common.TreeNode;
 import java.util.LinkedList;
 
 //二叉树的深度
+//阿里面试原题
 public class Solution003 {
+
     public int maxDepth(TreeNode root) {
         if(root == null) return 0;
         return Math.max(maxDepth(root.left),maxDepth(root.right)) + 1;
     }
+
+    public static int dfs(TreeNode node){
+        if (node == null) return 0;
+        int left = dfs(node.left);
+        int right = dfs(node.right);
+        return left > right ? left+1 : right+1;
+    }
+
+    public static void main(String[] args) {
+        //  test
+        //  TreeNode node = new TreeNode(0);
+        //  node.left = new TreeNode(1);
+        //  node.right = new TreeNode(2);
+        //  node.right.left = new TreeNode(3);
+
+        //  TreeNode node = new TreeNode(0);
+        //  node.right = new TreeNode(2);
+        //  node.right.right = new TreeNode(3);
+
+        TreeNode node = new TreeNode(0);
+        node.left = new TreeNode(1);
+        node.right = new TreeNode(2);
+        node.right.right = new TreeNode(3);
+        node.right.left = new TreeNode(3);
+        System.out.println(dfs(node));
+    }
+
 
     public int maxDepth2(TreeNode root) {
         if (root == null) {

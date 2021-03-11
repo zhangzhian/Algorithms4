@@ -15,8 +15,25 @@ public class Solution001 {
         }
         return builder.toString();
     }
+
+    //2021.03.11
+    public String reverseLeftWords3(String s, int n){
+        return s.substring(n) + s.substring(0,n);
+    }
+
+    //2021.03.11
+    public String reverseLeftWords4(String s, int n){
+        StringBuilder buff = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            buff.append(s.charAt((i + n) % s.length()));
+        }
+        return buff.toString();
+    }
+
     public static void main(String[] args) {
         System.out.println(new Solution001().reverseLeftWords1("abcdefg",2));
         System.out.println(new Solution001().reverseLeftWords2("abcdefg",2));
+        System.out.println(new Solution001().reverseLeftWords3("abcdefg",2));
+        System.out.println(new Solution001().reverseLeftWords4("abcdefg",2));
     }
 }

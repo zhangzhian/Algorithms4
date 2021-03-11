@@ -64,7 +64,16 @@ public class Solution002 {
         return root;
     }
 
-    public static void main(String[] args) {
+    //2021.03.11
+    public TreeNode mirrorTree4(TreeNode root){
+        if (root == null) return null;
+        TreeNode left = mirrorTree4(root.right);
+        TreeNode right = mirrorTree4(root.left);
 
+        root.left = right;
+        root.right = left;
+
+        return root;
     }
+
 }
